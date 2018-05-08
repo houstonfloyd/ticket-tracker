@@ -1,0 +1,17 @@
+<h2>Tickets</h2>
+
+<div>
+  <h3>Filter:</h3>
+  <%= form_tag 'tickets', method: :get do %>
+    <div>
+      <%= select_tag :project, options_from_collection_for_select(Project.all, :id, :name, params[:project]), include_blank: "All Projects" %>
+      <%= select_tag :status, options_for_select(Ticket::STATUSES.map{|t| [t.titleize, t]}, params[:status]), include_blank: "Any Status" %>
+      <%= select_tag :tag, options_from_collection_for_select(Tag.all, :id, :name, params[:tag]), include_blank: "All" %>
+    </div>
+    <%= submit_tag 'Update' %>
+    <%= link_to "Clear Filters", tickets_path %>
+  <% end %>
+</div>
+
+<%= render 'shared/tickettable', tickets: @tickets %>
+

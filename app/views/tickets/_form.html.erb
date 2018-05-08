@@ -1,0 +1,32 @@
+
+<%= render 'shared/errors', obj: @ticket %>
+
+<div>
+  <%= form_for @ticket do |f| %>
+    <div>
+      <%= f.label "Project" %>
+      <%= f.collection_select(:project_id, Project.all, :id, :name) %>
+    </div>
+    <div><%= f.label :name %></div>
+    <div><%= f.text_field :name %></div>
+    <div><%= f.label :body %></div>
+    <div> <%= f.text_area :body, rows: 5 %></div>
+    <div>
+      <%= f.label "Status" %>
+      <%= f.select :status, Ticket::STATUSES.map{|t| [t, t]} %>
+    </div>
+    <div>
+      <%= f.label "Tags" %>
+      <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name do |cb| %>
+      <% cb.label {cb.check_box + cb.text} %>
+      <% end %>
+    </div>
+    <div>
+      <%= f.label "Assignee" %>
+      <%= f.collection_select(:assignee_id, User.all, :id, :username) %>
+    </div>
+    <%= f.submit(@ticket.new_record? ? 'Create Ticket' : 'Update Ticket') %>   
+  <% end %>
+</div>
+
+
