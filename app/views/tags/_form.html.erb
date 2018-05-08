@@ -1,0 +1,12 @@
+
+<%= render 'shared/errors', obj: @tag %>
+
+<h2><%= @tag.new_record? ? 'New Tag' : 'Editing Tag' %></h2>
+<div>
+  <%= form_for @tag do |f| %>
+    <div><%= f.label :name %></div>
+    <div><%= f.text_field :name %></div>
+    </div>
+    <%= f.submit(@tag.new_record? ? 'Create Tag' : 'Update Tag') %>   
+  <% end %>
+</div>

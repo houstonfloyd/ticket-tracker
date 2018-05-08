@@ -1,0 +1,16 @@
+<h2>Register Account</h2>
+
+<div>
+  <%= form_for @user do |f| %>
+    <%= render 'shared/errors', obj: @user %>
+    <div><%= f.label :username %></div>
+    <div><%= f.text_field :username%></div>
+    <div><%= f.label :email %></div>
+    <div><%= f.email_field :email%></div>
+    <div><%= f.label :password %></div>
+    <div><%= f.password_field :password %></div>
+    <div><%= f.label :password_confirmation %></div>
+    <div><%= f.password_field :password_confirmation %></div>
+    <%= f.submit('Register') %>
+  <% end %>
+</div>

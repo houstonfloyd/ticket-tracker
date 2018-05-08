@@ -1,0 +1,13 @@
+
+
+<div>
+  <%= form_for [@ticket, comment] do |f| %>
+    <div><%= f.label :body, 'Add a comment' %></div>
+    <div> <%= f.text_area :body, rows: 10 %></div>
+    <div>
+      <%= f.label "Status" %>
+      <%= select_tag :ticket_status, options_for_select(Ticket::STATUSES.map{|t| [t.titleize, t]}, params[:ticket_status]), id: :ticket_status, include_blank: "Do not change" %>
+    </div>
+    <%= f.submit(comment.new_record? ? 'Create Comment' : 'Edit Comment') %>
+  <% end %>
+</div>

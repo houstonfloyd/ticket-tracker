@@ -1,0 +1,27 @@
+<h2>Tags</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Tickets</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td>
+          <p><%= tag.name %></p>
+        </td>
+        <td><%= link_to tag.tickets.count, {controller: 'tickets', action: 'index', tag: tag.id } %></td>
+        <td>
+          <%= link_to 'Edit', edit_tag_path(tag) %> or <%= link_to 'Delete', tag_path(tag), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if @tags.empty? %>
+<div><em>Uh oh, there are no tags.</em></div>
+<% end %>
+<%= link_to 'New Tag', new_tag_path %>

@@ -1,0 +1,39 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Creator</th>
+      <th>Assignee</th>
+      <th>Status</th>
+      <th>Tags</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% tickets.each do |ticket| %>
+      <tr>
+        <td>
+          <strong><%= link_to ticket.name, ticket_path(ticket) %></strong>
+          <p><%= ticket.body %></p>
+        </td>
+        <td><%= ticket.creator.username %></td>
+        <td><%= ticket.assignee.try(:username) %></td>
+        <td><%= ticket.status %></td>
+        <td>
+          <% ticket.tags.each do |tag| %>
+            <p><%= tag.name %></p>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to 'Edit', edit_ticket_path(ticket) %>
+          <%= link_to 'Delete', ticket_path(ticket), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if tickets.empty? %>
+<div><em>Uh oh, there are no tickets for these filter settings! Clear some filters and update.</em></div>
+<% end %>
+<%= link_to 'New Ticket', new_ticket_path %>

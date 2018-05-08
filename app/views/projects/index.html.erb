@@ -1,0 +1,28 @@
+<h1>Projects</h1>
+
+<%= link_to 'Add Project', new_project_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Open Tickets</th>
+      <th>Total Tickets</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td>
+          <strong><%= link_to project.name, project_path(project) %></strong>
+          <p><%= project.description %></p>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if @projects.empty? %>
+<div><em>Uh oh, there are no tags.</em></div>
+<% end %>

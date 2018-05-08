@@ -1,0 +1,39 @@
+<h2><%= @ticket.name %></h2>
+<p><%= @ticket.body %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Creator</th>
+      <th>Assignee</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @ticket.status %></td>
+      <td><%= @ticket.creator.username %></td>
+      <td><%= @ticket.assignee.try(:username) %></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Comments</h2>
+<% @ticket.comments.each do |comment| %>
+  <div>
+    <p><%= comment.body %></p>
+    <em>posted by <%= comment.creator.username %> at <%= comment.created_at %></em>
+    <% if comment.creator == current_user %>
+      <%= link_to 'Edit', edit_ticket_comment_path(@ticket, comment) %>
+      <%= link_to 'Delete', ticket_comment_path(@ticket, comment), method: :delete %>
+    <% end %>
+  </div>
+<% end %>
+
+<br>
+
+<% if @comment && @comment.errors.any? %>
+  <%= render 'shared/errors', obj: @comment %>
+<% end %>
+
+<%= render 'comments/form', comment: Comment.new %>
