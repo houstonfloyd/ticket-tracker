@@ -1,3 +1,3 @@
 # Ticket Tracker App
 
-A simple app that manages tickets for projects
+A simple app  that manages tickets for projects
